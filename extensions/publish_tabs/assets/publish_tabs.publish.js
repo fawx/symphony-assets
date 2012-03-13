@@ -26,8 +26,7 @@ var PublishTabs = {
 		jQuery('body').addClass('publish-tabs');
 		
 		// are we creating a new entry or editing an existing one?
-		var env = Symphony.Context.get('env');
-		this.new_entry = (env.page === 'new');
+		this.new_entry = jQuery('form:first').attr('action').replace(/\//g,'').match(/new$/);
 		
 		var has_invalid_tabs = false;
 		this.tab_controls = jQuery('<ul id="publish-tabs-controls"></ul>');
@@ -48,7 +47,7 @@ var PublishTabs = {
 			jQuery(main_fields).wrapAll('<div class="tab-group tab-group-' + tab + '"></div>');
 			jQuery(sidebar_fields).wrapAll('<div class="tab-group tab-group-' + tab + '"></div>');
 			
-			var tab_field = jQuery('#field-' + tab).remove();
+			var tab_field = jQuery('#tab-' + tab).remove();
 			var tab_text = (tab_field.text() != '') ? tab_field.text() : Symphony.Language.get('Untitled Tab');
 			var tab_button = jQuery('<li class="'+tab+'">' + tab_text + '</li>');
 			
@@ -78,7 +77,7 @@ var PublishTabs = {
 			this.tab_controls.find('li:first').click();
 		}
 		
-		jQuery('#context').append(this.tab_controls);
+		jQuery('#contents h2').after(this.tab_controls);
 		
 	},
 	

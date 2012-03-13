@@ -2,6 +2,19 @@
 	
 	class extension_publish_tabs extends Extension {
 		
+		public function about() {
+			return array(
+				'name'			=> 'Publish Tabs',
+				'version'		=> '1.0.1',
+				'release-date'	=> '2011-02-11',
+				'author'		=> array(
+					'name'			=> 'Nick Dunn',
+					'website'		=> 'http://nick-dunn.co.uk'
+				),
+				'description' => 'Add tab groups to entry forms'
+			);
+		}
+		
 		public function uninstall() {
 			Symphony::Database()->query("DROP TABLE `tbl_fields_publish_tabs`");
 		}
@@ -28,7 +41,7 @@
 		}
 		
 		public function initializeAdmin($context) {	
-			$page = Administration::instance()->Page;
+			$page = $context['parent']->Page;
 			
 			$callback = Administration::instance()->getPageCallback();
 			
@@ -39,9 +52,10 @@
 				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.js', 987654322);
 				
 				include_once(TOOLKIT . '/class.sectionmanager.php');
+				$sm = new SectionManager(Administration::instance());
 				
-				$section_id = SectionManager::fetchIDFromHandle($callback['context']['section_handle']);
-				$section = SectionManager::fetch($section_id);
+				$section_id = $sm->fetchIDFromHandle($callback['context']['section_handle']);
+				$section = $sm->fetch($section_id);
 				
 				$tabs = array();
 				$current_tab = '';
@@ -49,7 +63,7 @@
 				foreach($section->fetchFieldsSchema() as $i => $field) {
 					if ($i == 0 && $field['type'] != 'publish_tabs') $current_tab = 'untitled-tab';
 					if ($field['type'] == 'publish_tabs') {
-						$current_tab = $field['id'];
+						$current_tab = $field['element_name'];
 					} else {
 						$tabs[$current_tab][$field['location']][] = 'field-' . $field['id'];
 					}
