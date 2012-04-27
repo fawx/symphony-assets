@@ -95,6 +95,10 @@ $useIEFilters: 0; // might be 0 or 1.
 
 
 @mixin hidetext {
+    background-color: transprent;
+    border: 0;
+    color: transparent;
     display: block;
-    text-indent: -9999em;
+    font: 0/0 a;
+    text-shadow: none;
 }

@@ -19,8 +19,10 @@ OrderEntries = {
 		
 		this.config = Symphony.Context.get('order-entries');
 		
-		jQuery('#breadcrumbs').append('<p class="inactive"><span>(' + Symphony.Language.get('drag to reorder') + ')</span></p>');
+		this.h2 = jQuery('#contents > h2');
 		this.column_index = this.table.find('thead th a.active[href*="sort=' + this.config.id + '&"]').parent().prevAll().length;
+		
+		this.h2.find('> span:first').after('<span class="inactive" style="margin-left:5px;">(' + Symphony.Language.get('drag to reorder') + ')</span>');
 		
 		// disable sorting of other columns by removing the anchors
 		if(this.config['force-sort'] == 'yes') {
@@ -50,12 +52,12 @@ OrderEntries = {
 		this.table.unbind('orderstop');
 
 		// Store current sort order
-		this.table.on('orderstart.orderable', function() {
+		this.table.live('orderstart', function() {
 			old_sorting = self.table.find('input').map(function(e, i) { return this.name + '=' + (e + 1); }).get().join('&');
 		});
 
 		// Process sort order
-		this.table.on('orderstop.orderable', function() {
+		this.table.live('orderstop', function() {
 			self.table.addClass('busy');
 
 			// Get new sort order
@@ -73,11 +75,13 @@ OrderEntries = {
 					url: Symphony.Context.get('root') + '/symphony/extension/order_entries/save/',
 					data: jQuery('input', this).map(function(e, i) { return this.name + '=' + (e + 1); }).get().join('&') + '&field=' + self.config.id,
 					success: function() {
-						// Symphony.Message.clear('reorder');
-						// Symphony.Message.post(Symphony.Language.get('Entry order saved.'), 'reorder success');
+						Symphony.Message.clear('reorder');
+						Symphony.Message.post(Symphony.Language.get('Entry order saved.'), 'reorder success');
+						Symphony.Message.fade('silence', 2000);
 					},
 					error: function() {
-						//Symphony.Message.post(Symphony.Language.get('Reordering was unsuccessful.'), 'reorder error');
+						Symphony.Message.post(Symphony.Language.get('Reordering was unsuccessful.'), 'reorder error');
+						Symphony.Message.fade('silence', 2000);
 					},
 					complete: function() {
 						self.table.removeClass('busy').find('tr').removeClass('selected');

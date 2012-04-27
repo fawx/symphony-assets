@@ -1,6 +1,15 @@
 <?php
 
 	Class extension_order_entries extends Extension{
+	
+		public function about(){
+			return array('name' => 'Order Entries',
+						 'version' => '1.9.8',
+						 'release-date' => '2011-12-19',
+						 'author' => array('name' => 'Nick Dunn',
+										   'website' => 'http://nick-dunn.co.uk')
+				 		);
+		}
 		
 		public function getSubscribedDelegates(){
 			return array(
@@ -20,41 +29,41 @@
 			if(isset($page_callback['section_handle']) && $page_callback['page'] == 'index'){
 				
 				// find sort settings for this section (sort field ID and direction)
-				$section_id = SectionManager::fetchIDFromHandle($page_callback['section_handle']);
-				if(!$section_id) return;
-				
-				$section = SectionManager::fetch(SectionManager::fetchIDFromHandle($page_callback['section_handle']));
+				$section_handle = $page_callback['section_handle'];
+				$section = Symphony::Database()->fetchRow(0, "SELECT entry_order, entry_order_direction FROM tbl_sections WHERE handle='$section_handle'");
 				
 				// we only want a valid entry order field and ascending order only
-				if ($section->getSortingOrder() !== 'asc' || !is_numeric($section->getSortingField())) return;
+				if ($section['entry_order_direction'] != 'asc' || !is_numeric($section['entry_order'])) return;
 				
-				$field = FieldManager::fetch($section->getSortingField());
-				if($field->get('type') !== 'order_entries') return;
+				$order_entries_field = Symphony::Database()->fetchRow(0, "SELECT field_id as `id`, force_sort FROM tbl_fields_order_entries WHERE field_id=" . $section['entry_order']);
 				
-				Administration::instance()->Page->addElementToHead(
-					new XMLElement(
-						'script',
-						"Symphony.Context.add('order-entries', " . json_encode(array(
-							'id' => $field->get('id'),
-							'force-sort' => $field->get('force_sort'),
-						)) . ");",
-						array('type' => 'text/javascript')
-					), time()
-				);
-				
-				Administration::instance()->Page->addScriptToHead(
-					URL . '/extensions/order_entries/assets/order_entries.publish.js',
-					time()
-				);
-				
-				Symphony::Configuration()->set("pagination_maximum_rows", 99999, "symphony");
-				
+				if($order_entries_field) {
+					
+					Administration::instance()->Page->addElementToHead(
+						new XMLElement(
+							'script',
+							"Symphony.Context.add('order-entries', " . json_encode(array(
+								'id' => $order_entries_field['id'],
+								'force-sort' => $order_entries_field['force_sort'],
+							)) . ");",
+							array('type' => 'text/javascript')
+						), time()
+					);
+					
+					Administration::instance()->Page->addScriptToHead(
+						URL . '/extensions/order_entries/assets/order_entries.publish.js',
+						time()
+					);
+					
+					Symphony::Configuration()->set("pagination_maximum_rows", 99999, "symphony");
+					
+				}
 			}
 			
 		}
 		
 		public function uninstall(){
-			Symphony::Database()->query("DROP TABLE `tbl_fields_order_entries`");
+			$this->_Parent->Database->query("DROP TABLE `tbl_fields_order_entries`");
 		}
 
 		public function update($previousVersion){
@@ -79,3 +88,5 @@
 		}
 			
 	}
+
+?>
