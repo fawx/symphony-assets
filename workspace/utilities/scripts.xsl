@@ -10,8 +10,8 @@
             load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
         });
     </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('&lt;script src="/workspace/js/libs/jquery-1.7.1.min.js">&lt;\/script>')</script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('&lt;script src="/workspace/js/libs/jquery-1.8.1.min.js">&lt;\/script>')</script>
 
     <script type="text/javascript" src="{$workspace}/js/plugins.js"></script>
     <script type="text/javascript" src="{$workspace}/js/script.js"></script>
