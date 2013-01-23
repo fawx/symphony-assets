@@ -1,31 +1,7 @@
-@import "_normalize"; /* cross-browser style normalization */
-@import "_mixins"; /* various css3 mixins */
-@import "_fonts"; /* custom @font-faces go here */
-
-
-
-
-// base elements
-a { text-decoration: none; }
-p { margin: 0 0 15px 0; }
-nav > ul { 
-    margin: 0; 
-    padding: 0; 
-}
-
-
-
-
-// helper classes
-.container {
-    margin: 0 auto;
-    width: 960px;
-}
-
-
-
-
-// sass mixins and variables
+@import "normalize"; // cross-browser style normalization
+@import "mixins"; // various css3 mixins
+@import "fonts"; // custom @font-faces go here
+@import "global"; // common elements, classes, variables, mixins, etc
 
 
 

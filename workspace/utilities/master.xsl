@@ -56,6 +56,7 @@
             </footer>
 
 
+            <!-- scripts called at the end of page to speed up loading time -->
             <xsl:call-template name="scripts" />
         </body>
     </html>

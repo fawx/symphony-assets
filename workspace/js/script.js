@@ -8,7 +8,7 @@
 
 
 PROJECTNAME = {
-    home : {
+    common : {
         init : function() {
             // all external links should open in a new tab
             $("a[href^='http']").attr("target", "_blank");
