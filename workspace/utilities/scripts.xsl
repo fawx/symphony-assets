@@ -19,7 +19,7 @@
 
     <script type="text/javascript" src="{$workspace}/js/plugins.js"></script>
 
-    <script type="text/javascript" src="{$workspace}/js/script.js"></script>
+    <script type="text/javascript" src="{$workspace}/js/main.js"></script>
 
 
     <!-- chrome frame -->

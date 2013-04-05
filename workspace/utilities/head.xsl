@@ -21,7 +21,7 @@
     </title>
 
 
-    <link rel="stylesheet" href="{$workspace}/css/style.css" />
+    <link rel="stylesheet" href="{$workspace}/css/main.css" />
 
 
     <script src="{$workspace}/js/libs/modernizr-2.6.2.min.js"></script>
