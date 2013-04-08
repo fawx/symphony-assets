@@ -1,3 +1,15 @@
+// sass mixins and variables
+@mixin hidetext {
+    background-color: transprent;
+    border: 0;
+    color: transparent;
+    display: block;
+    font: 0/0 a;
+    text-shadow: none;
+}
+
+
+
 // base elements
 a { text-decoration: none; }
 
@@ -10,9 +22,6 @@ nav {
     }
 }
 
-*:hover {
-    @include transition(all 250ms);
-}
 
 
 // helper classes
@@ -35,13 +44,4 @@ nav {
 
 
 
-// sass mixins and variables
-@mixin hidetext {
-    background-color: transprent;
-    border: 0;
-    color: transparent;
-    display: block;
-    font: 0/0 a;
-    text-shadow: none;
-}
 

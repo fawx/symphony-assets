@@ -53,10 +53,10 @@ $useIEFilters: 0;
                   background-clip: padding-box;
 }
 
-@mixin box-shadow ($x, $y, $offset, $hex, $ie: $useIEFilters, $inset: null, $spread:null) {
-     -moz-box-shadow: $x $y $offset $spread $hex $inset;
-  -webkit-box-shadow: $x $y $offset $spread $hex $inset;
-          box-shadow: $x $y $offset $spread $hex $inset;
+@mixin box-shadow ($x) {
+     -moz-box-shadow: $x;
+  -webkit-box-shadow: $x;
+          box-shadow: $x;
   
   @if $ie == 1 {
     $iecolor: '#' + red($hex) + green($hex) + blue($hex);
