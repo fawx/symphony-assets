@@ -1,33 +1,11 @@
-@import "normalize"; // cross-browser style normalization
-@import "mixins"; // various css3 mixins
-@import "fonts"; // custom @font-faces go here
-@import "global"; // common elements, classes, variables, mixins, etc
+@import 'normalize'; // cross-browser style normalization
 
+@import 'mixins'; // css3 and cross-browser mixins
 
+@import 'grid'; 
 
+@import 'global'; // common elements, classes, variables, mixins, etc
 
-// layout elements
-body, html { height: 100%; }
+@import 'header';
 
-body {
-    font: 13px/1.4 arial, sans-serif;
-}
-
-
-#content {
-    min-height: 100%;
-    margin-bottom: -50px; // negative footer height
-    position: relative;
-}
-
-
-#main {
-    padding-bottom: 100px; // extra padding for footer
-}
-
-
-footer {
-    height: 50px;
-    position: relative;
-}
-
+@import 'footer';

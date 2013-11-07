@@ -23,36 +23,28 @@
 <xsl:template match="/">
     <xsl:comment><![CDATA[[if lte IE 8]> <html lang="en" class="ie"> <![endif]]]></xsl:comment>
     <xsl:comment><![CDATA[[if gt IE 9]><!]]></xsl:comment> <html lang="en" class="no-js"> <xsl:comment><![CDATA[<![endif]]]></xsl:comment>
-        <head>
-            <xsl:call-template name="head" />
-        </head>
+        <xsl:call-template name="head" />
 
 
 
         <body class="{$current-page}">
-            <div id="content">
-                <header>
-                    <div class="container">
-                        <nav>
-                            <ul>
-                                <!-- pages that shouldn't show up in navigation should have the type 'nonav' -->
-                                <xsl:apply-templates select="/data/navigation/page[not(types//type = 'nonav')]" />
-                            </ul>
-                        </nav>
-                    </div>
-                </header>
+            <header>
+                <nav>
+                    <ul>
+                        <!-- pages that shouldn't show up in navigation should have the type 'nonav' -->
+                        <xsl:apply-templates select="/data/navigation/page[not(types//type = 'nonav')]" />
+                    </ul>
+                </nav>
+            </header>
 
 
-                <div id="main" class="container">
-                    <xsl:apply-templates select="/data" />
-                </div>
-            </div> <!-- /content -->
+            <div class="page-content">
+                <xsl:apply-templates select="/data" />
+            </div>
 
 
             <footer>
-                <div class="container">
-                    <small>&#169; <xsl:value-of select="$this-year" /> </small>
-                </div>
+                <small>&#169; <xsl:value-of select="$this-year" /> </small>
             </footer>
 
 
@@ -71,6 +63,7 @@
         <xsl:attribute name="class">
             <xsl:value-of select="@handle" /><xsl:if test="$current-page = @handle"> active</xsl:if>
         </xsl:attribute>
+
         <a href="/{@handle}/">
             <xsl:value-of select="name" />
         </a>

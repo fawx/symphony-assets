@@ -1,0 +1,98 @@
+// media queries
+$tablet-portrait: "only screen and (max-width: 959px)";
+$mobile-landscape: "only screen and (max-width: 767px)";
+$mobile-portrait: "only screen and (max-width: 479px)";
+
+$column-width: 60px;
+
+
+
+@mixin container {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 940px;
+
+    @media #{$tablet-portrait} { width: 768px; }
+
+    @media #{$mobile-landscape} { width: auto; }
+
+    @media #{$mobile-portrait} { width: auto; }
+}
+
+
+
+// $n: number of columns to span across
+@mixin columns($n) {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: ($n * $column-width) + (($n - 1) * 20px);
+
+    @media #{$tablet-portrait} { width: ($n * 45px) + (($n - 1) * 20px); }
+
+    @media #{$mobile-landscape} { 
+        float: none;
+        padding: 0 15px;
+        width: auto; 
+    }
+
+    @media #{$mobile-portrait} { 
+        float: none;
+        padding: 0 15px;
+        width: auto; 
+    }
+}
+
+
+
+
+@mixin columns-one-third {
+    width: 300px;
+
+    @media #{$tablet-portrait} { width: 236px; }
+
+    @media #{$mobile-landscape} { width: auto; }
+
+    @media #{$mobile-portrait} { width: auto; }
+}
+
+
+
+@mixin columns-two-thirds {
+    width: 620px;
+
+    @media #{$tablet-portrait} { width: 492px; }
+
+    @media #{$mobile-landscape} { width: auto; }
+
+    @media #{$mobile-portrait} { width: auto; }
+}
+
+
+
+@mixin column-alpha { margin-left: 0; }
+
+
+
+@mixin column-omega { margin-right: 0; }
+
+
+
+// $n: # of columns to offset against
+@mixin offset($n) {
+    padding-left: $n * $column-width;
+
+    @media #{$tablet-portrait} { width: 48px * $n; }
+
+    @media #{$mobile-landscape} { padding-left: 0; }
+
+    @media #{$mobile-portrait} { padding-left: 0; }
+}
+
+
+
+@mixin row {
+    margin-bottom: 20px; 
+}

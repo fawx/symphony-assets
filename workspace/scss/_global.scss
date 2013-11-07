@@ -1,3 +1,4 @@
+
 // sass mixins and variables
 @mixin hidetext {
     background-color: transprent;
@@ -9,8 +10,31 @@
 }
 
 
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after { clear: both; }
+}
+
+
+
 
 // base elements
+// layout elements
+body, 
+html { height: 100%; }
+
+body {
+    font: 13px/1.4 arial, sans-serif;
+}
+
+
 a { text-decoration: none; }
 
 p { margin: 0 0 15px 0; }
@@ -24,24 +48,7 @@ nav {
 
 
 
+
+
+
 // helper classes
-.container {
-    margin: 0 auto;
-    width: 960px;
-}
-
-
-.clearfix {
-    &:after {
-        content: " ";
-        display: block;
-        clear: both;
-        visibility: hidden;
-        line-height: 0;
-        height: 0;
-    }
-}
-
-
-
-

@@ -5,26 +5,27 @@
 
 
 
-<!-- <head> -->
 <xsl:template name="head">
-    <meta charset="utf-8" />
+    <head>
+        <meta charset="utf-8" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <meta name="viewport" content="width=device-width" />
-
-
-    <title>
-        <xsl:call-template name="title" />
-        <xsl:text> | </xsl:text>
-        <xsl:value-of select="data/params/website-name" />
-    </title>
+        <meta name="viewport" content="width=device-width" />
 
 
-    <link rel="stylesheet" href="{$workspace}/css/main.css" />
+        <title>
+            <xsl:call-template name="title" />
+            <xsl:text> | </xsl:text>
+            <xsl:value-of select="data/params/website-name" />
+        </title>
 
 
-    <script src="{$workspace}/js/libs/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="{$workspace}/css/main.css" />
+
+
+        <script src="{$workspace}/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
 </xsl:template>
 
 
